@@ -1,0 +1,96 @@
+@import "../../assets/variables.scss";
+
+header ul {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
+
+  @media screen and (max-width: 780px) {
+    flex-direction: column;
+    align-items: center;
+  }
+  a {
+    text-decoration: none;
+    color: $text-color;
+  }
+  .selected {
+    background-color: $text-color-hover;
+    padding: 8px;
+    border-radius: 4px;
+  }
+  .transactions-and-report {
+    display: flex;
+    li {
+      margin: 20px 12px;
+      text-align: center;
+    }
+  }
+  .total {
+    align-self: center;
+    font-weight: bold;
+  }
+  .username-and-add-transaction {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    @media screen and (max-width: 780px) {
+      flex-direction: column;
+      align-items: center;
+      .dropdown-wrapper {
+        order: 2;
+      }
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        min-width: 200px;
+        li {
+          margin: 12px 20px;
+        }
+        .logout:hover {
+          background-color: $text-color-hover;
+          padding: 4px;
+          border-radius: 4px;
+        }
+      }
+
+      .dropbtn {
+        border: none;
+        background: none;
+        color: $text-color;
+        cursor: pointer;
+        padding: 0px 20px;
+      }
+      .username {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .add-transaction {
+      margin: 8px 12px;
+      color: $text-color-hover;
+      background-color: $theme-color;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      outline: none;
+      text-transform: uppercase;
+    }
+  }
+}

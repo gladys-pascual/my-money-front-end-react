@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+// import TransactionForm from "./components/TransactionForm/TransactionForm";
+import "./App.scss";
+import Transactions from "./pages/Transactions/Transactions";
+import Report from "./pages/Report/Report";
+import Header from "./components/Header/Header";
+import { Switch, Route } from "react-router-dom";
+import TransactionService from "./services/TransactionService";
 
-function App() {
+const App = () => {
+  const [transactions, setTransactions] = useState([]);
+
+  //Get transactions
+  useEffect(() => {
+    TransactionService.getTransactions()
+      .then((res) => {
+        setTransactions(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => <Transactions transactions={transactions} />}
+        />
+        <Route path="/report" render={() => <Report />} />
+      </Switch>
+    </>
   );
-}
+};
 
 export default App;

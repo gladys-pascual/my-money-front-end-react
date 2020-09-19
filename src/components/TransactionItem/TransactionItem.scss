@@ -1,0 +1,17 @@
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  .transaction-item-LHS {
+    line-height: 12px;
+    .transaction-notes {
+      font-style: italic;
+    }
+  }
+
+  .income {
+    color: #039be5;
+  }
+  .expense {
+    color: #e51c23;
+  }
+}
