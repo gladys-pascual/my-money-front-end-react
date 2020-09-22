@@ -23,8 +23,9 @@ header ul {
   }
   .transactions-and-report {
     display: flex;
+
     li {
-      margin: 20px 12px;
+      margin: 20px;
       text-align: center;
     }
   }
@@ -51,7 +52,6 @@ header ul {
       .dropdown-content {
         display: none;
         position: absolute;
-        min-width: 200px;
         li {
           margin: 12px 20px;
         }
@@ -91,6 +91,15 @@ header ul {
       cursor: pointer;
       outline: none;
       text-transform: uppercase;
+    }
+    .add-transaction:hover {
+      background: #51e4d7;
+    }
+    .add-transaction:active {
+      transition: 0.3s all;
+      transform: translateY(3px);
+      border: 1px solid transparent;
+      opacity: 0.8;
     }
   }
 }

@@ -1,17 +1,49 @@
+@import "../../assets/variables.scss";
+
 .transaction-item {
   display: flex;
   justify-content: space-between;
-  .transaction-item-LHS {
+
+  .transaction-description {
     line-height: 12px;
     .transaction-notes {
       font-style: italic;
     }
   }
 
-  .income {
-    color: #039be5;
-  }
-  .expense {
-    color: #e51c23;
+  .transaction-item-RHS {
+    display: flex;
+    p {
+      font-size: 18px;
+      align-self: center;
+    }
+    .income {
+      color: #039be5;
+    }
+    .expense {
+      color: #e51c23;
+    }
+    .remove-and-edit-buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .remove-transaction,
+      .edit-transaction {
+        align-self: flex-start;
+        border: none;
+        outline: none;
+        color: lightgrey;
+        cursor: pointer;
+        margin: 16px 0 0 12px;
+
+        background: none;
+      }
+      .remove-transaction:hover {
+        color: #e51c23;
+      }
+      .edit-transaction:hover {
+        color: $theme-color;
+      }
+    }
   }
 }

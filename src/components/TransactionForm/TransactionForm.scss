@@ -1,4 +1,99 @@
+@import "../../assets/variables.scss";
+
 .form {
   display: flex;
   flex-direction: column;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.error-message {
+  color: #bf1650;
+}
+
+.error-message::before {
+  display: inline;
+  content: "⚠ ";
+}
+
+button[type="submit"],
+input[type="submit"] {
+  background: $theme-color;
+  color: white;
+  // text-transform: uppercase;
+  border: none;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 8px;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background: #51e4d7;
+}
+
+button[type="submit"]:active,
+input[type="button"]:active,
+input[type="submit"]:active {
+  transition: 0.3s all;
+  transform: translateY(3px);
+  border: 1px solid transparent;
+  opacity: 0.8;
+}
+
+input:disabled {
+  opacity: 0.4;
+}
+
+input[type="button"]:hover {
+  transition: 0.3s all;
+}
+
+button[type="submit"],
+input[type="button"],
+input[type="submit"] {
+  -webkit-appearance: none;
+}
+
+.App {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+button[type="button"] {
+  display: block;
+  appearance: none;
+  background: #333;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+hr {
+  margin-top: 30px;
+}
+
+// button {
+//   display: block;
+//   appearance: none;
+//   margin-top: 40px;
+//   border: 1px solid #333;
+//   margin-bottom: 20px;
+//   // text-transform: uppercase;
+//   padding: 10px 20px;
+//   border-radius: 4px;
+// }

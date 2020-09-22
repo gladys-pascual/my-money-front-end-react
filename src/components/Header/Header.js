@@ -1,15 +1,23 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Header.scss";
 
-const Header = () => {
+const Header = ({ transactions, openModal }) => {
+  const totalMoney = transactions.reduce((total, transaction) => {
+    return transaction.type === "expense"
+      ? total - transaction.amount
+      : total + transaction.amount;
+  }, 0);
+
+  const location = useLocation();
+
   return (
     <header>
       <ul>
         <div className="transactions-and-report">
           <li>
             {" "}
-            <NavLink exact to="/" activeClassName="selected">
+            <NavLink to="/transactions" activeClassName="selected">
               Transactions
             </NavLink>{" "}
           </li>
@@ -21,10 +29,16 @@ const Header = () => {
         </div>
 
         <div className="total">
-          <li>Total: € 40</li>
+          <li>Total: {totalMoney.toFixed(2)} €</li>
         </div>
 
         <div className="username-and-add-transaction">
+          {location.pathname === "/transactions" && (
+            <button className="add-transaction" onClick={() => openModal()}>
+              {" "}
+              + Add transaction{" "}
+            </button>
+          )}
           <div className="dropdown-wrapper">
             <div className="dropdown">
               <button className="username dropbtn">
@@ -33,15 +47,13 @@ const Header = () => {
               </button>
               <div className="dropdown-content">
                 <li>
-                  <Link exact="true" to="/" className="logout">
+                  <Link to="/transactions" className="logout">
                     Logout
                   </Link>
                 </li>
               </div>
             </div>
           </div>
-
-          <button className="add-transaction"> + Add transaction </button>
         </div>
       </ul>
     </header>
