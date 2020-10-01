@@ -9,17 +9,43 @@ import TransactionService from "./services/TransactionService";
 import TransactionForm from "./components/TransactionForm/TransactionForm";
 import Modal from "react-modal";
 import categories from "./categories";
+import DeleteConfirmation from "./components/DeleteConfirmation/DeleteConfirmation";
 
 const App = () => {
   const [transactions, setTransactions] = useState([]);
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [transactionModalIsOpen, setTransactionModalIsOpen] = useState(false);
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
+  const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false);
+  const [transactionInfo, setTransactionInfo] = useState({});
 
-  const openModal = () => {
-    setIsOpen(true);
+  // Transaction modal
+  const openTransactionModal = () => {
+    setTransactionModalIsOpen(true);
   };
 
-  const closeModal = () => {
-    setIsOpen(false);
+  const closeTransactionModal = () => {
+    setTransactionModalIsOpen(false);
+  };
+
+  // Delete modal
+  const openDeleteModal = (id) => {
+    setDeleteModalIsOpen(true);
+    setDeleteId(id);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalIsOpen(false);
+  };
+
+  // Update modal
+  const openUpdateModal = (transactionInfo) => {
+    setUpdateModalIsOpen(true);
+    setTransactionInfo(transactionInfo);
+  };
+
+  const closeUpdateModal = () => {
+    setUpdateModalIsOpen(false);
   };
 
   //Get transactions
@@ -39,10 +65,33 @@ const App = () => {
   const handleCreateTransaction = (data) => {
     TransactionService.createTransaction(data)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        closeModal();
+        closeTransactionModal();
         getTransactions();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //Delete transaction
+  const handleDeleteTransaction = (id) => {
+    TransactionService.deleteTransaction(id)
+      .then(() => {
+        closeDeleteModal();
+        getTransactions();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //Update Transaction
+  const handleUpdateTransaction = (transactionInfo) => {
+    TransactionService.createTransaction(transactionInfo)
+      .then(() => TransactionService.deleteTransaction(transactionInfo.id))
+      .then(() => {
+        getTransactions();
+        closeUpdateModal();
       })
       .catch((err) => {
         console.log(err);
@@ -51,30 +100,67 @@ const App = () => {
 
   return (
     <>
-      <Header transactions={transactions} openModal={openModal} />
+      <Header
+        transactions={transactions}
+        openTransactionModal={openTransactionModal}
+      />
+
       <Switch>
         <Route
           exact
           path="/transactions"
-          render={() => <Transactions transactions={transactions} />}
+          render={() => (
+            <Transactions
+              transactions={transactions}
+              openDeleteModal={openDeleteModal}
+              openUpdateModal={openUpdateModal}
+            />
+          )}
         />
         <Route path="/report" render={() => <Report />} />
       </Switch>
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
+        isOpen={transactionModalIsOpen}
+        onRequestClose={closeTransactionModal}
         contentLabel="Transaction Form"
         ariaHideApp={false}
-        className="Modal"
-        overlayClassName="Overlay"
+        className="Modal-Transaction-Form"
+        overlayClassName="Overlay-Transaction-Form"
       >
-        <div>
-          <h1>Add Transaction </h1>
-        </div>
-
         <TransactionForm
-          createTransaction={handleCreateTransaction}
+          handleCreateTransaction={handleCreateTransaction}
           categories={categories}
+          closeTransactionModal={closeTransactionModal}
+        />
+      </Modal>
+      <Modal
+        isOpen={deleteModalIsOpen}
+        onRequestClose={closeDeleteModal}
+        contentLabel="Delete Confirmation"
+        ariaHideApp={false}
+        className="Modal-Delete"
+        overlayClassName="Overlay-Delete"
+      >
+        <DeleteConfirmation
+          handleDeleteTransaction={handleDeleteTransaction}
+          deleteId={deleteId}
+          closeDeleteModal={closeDeleteModal}
+        />
+      </Modal>
+      <Modal
+        isOpen={updateModalIsOpen}
+        onRequestClose={closeUpdateModal}
+        contentLabel="Update Transaction"
+        ariaHideApp={false}
+        className="Modal-Update"
+        overlayClassName="Overlay-Update"
+      >
+        <TransactionForm
+          transactionInfo={transactionInfo}
+          setTransactionInfo={setTransactionInfo}
+          handleUpdateTransaction={handleUpdateTransaction}
+          categories={categories}
+          closeUpdateModal={closeUpdateModal}
         />
       </Modal>
     </>

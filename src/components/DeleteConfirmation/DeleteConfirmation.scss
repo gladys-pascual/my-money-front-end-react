@@ -1,0 +1,43 @@
+@import "../../assets/variables.scss";
+
+.delete-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h3 {
+    color: $theme-color;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .delete {
+    margin: 8px 12px;
+    color: $text-color-hover;
+    background-color: #e51c23;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .yes:hover {
+    background: #f56166;
+  }
+  .no {
+    background-color: $theme-color;
+  }
+  .no:hover {
+    background-color: #51e4d7;
+  }
+  .delete-options {
+    @media screen and (max-width: 780px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

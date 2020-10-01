@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Header.scss";
 
-const Header = ({ transactions, openModal }) => {
+const Header = ({ transactions, openTransactionModal }) => {
   const totalMoney = transactions.reduce((total, transaction) => {
     return transaction.type === "expense"
       ? total - transaction.amount
@@ -34,7 +34,10 @@ const Header = ({ transactions, openModal }) => {
 
         <div className="username-and-add-transaction">
           {location.pathname === "/transactions" && (
-            <button className="add-transaction" onClick={() => openModal()}>
+            <button
+              className="add-transaction"
+              onClick={() => openTransactionModal()}
+            >
               {" "}
               + Add transaction{" "}
             </button>

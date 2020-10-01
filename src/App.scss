@@ -1,27 +1,83 @@
+@import "./assets/variables.scss";
+
 * {
   font-family: "Roboto", sans-serif;
   outline: none;
   box-sizing: border-box;
 }
 
-.Modal {
+.Modal-Transaction-Form,
+.Modal-Update {
   position: absolute;
-  top: 20%;
-  left: 20%;
-  right: 20%;
-  bottom: 20%;
+  top: 25%;
+  left: 25%;
+  right: 25%;
+  bottom: 25%;
   background-color: white;
   border-radius: 16px;
   padding: 12px 20px;
+  border: 4px solid $theme-color;
+  @media screen and (max-width: 1200px) {
+    top: 25%;
+    left: 20%;
+    right: 20%;
+    bottom: 25%;
+  }
+  @media screen and (max-width: 1000px) {
+    top: 25%;
+    left: 15%;
+    right: 15%;
+    bottom: 25%;
+  }
   @media screen and (max-width: 780px) {
-    top: 10%;
+    top: 20%;
     left: 10%;
     right: 10%;
-    bottom: 10%;
+    bottom: 20%;
   }
 }
 
-.Overlay {
+.Overlay-Transaction-Form,
+.Overlay-Update {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.Modal-Delete {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  right: 30%;
+  bottom: 48%;
+  background-color: white;
+  border-radius: 16px;
+  padding: 12px 20px;
+  border: 4px solid $theme-color;
+  @media screen and (max-width: 1200px) {
+    top: 30%;
+    left: 25%;
+    right: 25%;
+    bottom: 48%;
+  }
+  @media screen and (max-width: 1000px) {
+    top: 30%;
+    left: 15%;
+    right: 15%;
+    bottom: 48%;
+  }
+  @media screen and (max-width: 780px) {
+    top: 30%;
+    left: 10%;
+    right: 10%;
+    bottom: 40%;
+  }
+}
+
+.Overlay-Delete {
   position: fixed;
   top: 0;
   left: 0;

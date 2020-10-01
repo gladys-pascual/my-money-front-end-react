@@ -4,7 +4,11 @@ import dayjs from "dayjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
-const TransactionItem = ({ transactionInfo }) => {
+const TransactionItem = ({
+  transactionInfo,
+  openDeleteModal,
+  openUpdateModal,
+}) => {
   const date = dayjs(transactionInfo.date).format("DD MMM YYYY");
   const amount = transactionInfo.amount;
 
@@ -22,8 +26,17 @@ const TransactionItem = ({ transactionInfo }) => {
           €{amount.toFixed(2)}{" "}
         </p>
         <div className="remove-and-edit-buttons">
-          <button className="remove-transaction"> ✖ </button>
-          <button className="edit-transaction">
+          <button
+            className="remove-transaction"
+            onClick={() => openDeleteModal(transactionInfo.id)}
+          >
+            {" "}
+            ✖{" "}
+          </button>
+          <button
+            className="edit-transaction"
+            onClick={() => openUpdateModal(transactionInfo)}
+          >
             <FontAwesomeIcon icon={faEdit} />
           </button>
         </div>

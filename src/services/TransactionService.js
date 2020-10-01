@@ -13,6 +13,12 @@ const TransactionService = {
       "https://aw31er01t5.execute-api.eu-west-1.amazonaws.com/dev/transactions"
     );
   },
+
+  deleteTransaction: function (id) {
+    return axios.delete(
+      `https://aw31er01t5.execute-api.eu-west-1.amazonaws.com/dev/transaction/${id}`
+    );
+  },
 };
 
 export default TransactionService;
