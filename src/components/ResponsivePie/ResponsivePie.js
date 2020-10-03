@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ResponsivePieCanvas } from "@nivo/pie";
+import { ResponsivePie } from "@nivo/pie";
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -8,14 +8,15 @@ import { ResponsivePieCanvas } from "@nivo/pie";
 // you'll often use just a few of them.
 
 const MyResponsivePieCanvas = ({ data /* see data tab */ }) => (
-  <ResponsivePieCanvas
+  <ResponsivePie
     data={data}
-    margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+    margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+    sortByValue={true}
     pixelRatio={2}
-    innerRadius={0.5}
+    innerRadius={0.4}
     padAngle={0.7}
     cornerRadius={3}
-    colors={{ scheme: "paired" }}
+    colors={{ scheme: "pastel2" }}
     borderColor={{ from: "color", modifiers: [["darker", 0.6]] }}
     radialLabelsSkipAngle={10}
     radialLabelsTextXOffset={6}

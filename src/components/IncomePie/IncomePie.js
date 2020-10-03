@@ -1,6 +1,5 @@
 import React from "react";
 import MyResponsivePieCanvas from "../ResponsivePie/ResponsivePie";
-import "./IncomePie.scss";
 
 const IncomePie = ({ incomeData }) => {
   const aggregatedData = incomeData.reduce((result, current) => {
