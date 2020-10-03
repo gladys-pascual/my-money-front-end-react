@@ -1,0 +1,12 @@
+.report {
+  margin-top: 40px;
+  .pies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    @media screen and (max-width: 780px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

@@ -3,12 +3,6 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Header.scss";
 
 const Header = ({ transactions, openTransactionModal }) => {
-  const totalMoney = transactions.reduce((total, transaction) => {
-    return transaction.type === "expense"
-      ? total - transaction.amount
-      : total + transaction.amount;
-  }, 0);
-
   const location = useLocation();
 
   return (
@@ -26,10 +20,6 @@ const Header = ({ transactions, openTransactionModal }) => {
               Report
             </NavLink>{" "}
           </li>
-        </div>
-
-        <div className="total">
-          <li>Total: {totalMoney.toFixed(2)} €</li>
         </div>
 
         <div className="username-and-add-transaction">

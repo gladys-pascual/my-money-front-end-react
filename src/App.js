@@ -117,7 +117,10 @@ const App = () => {
             />
           )}
         />
-        <Route path="/report" render={() => <Report />} />
+        <Route
+          path="/report"
+          render={() => <Report transactions={transactions} />}
+        />
       </Switch>
       <Modal
         isOpen={transactionModalIsOpen}

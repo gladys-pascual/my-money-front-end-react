@@ -1,0 +1,10 @@
+.expense-pie-container {
+  height: 400px;
+  width: 400px;
+  h3 {
+    text-align: center;
+  }
+  @media screen and (max-width: 780px) {
+    margin-top: 80px;
+  }
+}
