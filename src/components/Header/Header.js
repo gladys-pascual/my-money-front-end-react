@@ -1,9 +1,15 @@
 import React from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useHistory } from "react-router-dom";
 import "./Header.scss";
 
-const Header = ({ transactions, openTransactionModal }) => {
+const Header = ({ openAddTransactionModal, username }) => {
   const location = useLocation();
+  const history = useHistory();
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    history.push(`/login`);
+  };
 
   return (
     <header>
@@ -26,7 +32,7 @@ const Header = ({ transactions, openTransactionModal }) => {
           {location.pathname === "/transactions" && (
             <button
               className="add-transaction"
-              onClick={() => openTransactionModal()}
+              onClick={() => openAddTransactionModal()}
             >
               {" "}
               + Add transaction{" "}
@@ -35,15 +41,13 @@ const Header = ({ transactions, openTransactionModal }) => {
           <div className="dropdown-wrapper">
             <div className="dropdown">
               <button className="username dropbtn">
-                <span>gladyskate</span>
+                <span>{username}</span>
                 <span className="material-icons">arrow_drop_down</span>
               </button>
               <div className="dropdown-content">
-                <li>
-                  <Link to="/transactions" className="logout">
-                    Logout
-                  </Link>
-                </li>
+                <button className="logout" onClick={() => handleLogOut()}>
+                  Logout
+                </button>
               </div>
             </div>
           </div>

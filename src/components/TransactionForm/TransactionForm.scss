@@ -12,10 +12,9 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.form {
+.transaction-form {
   display: flex;
   flex-direction: column;
-
   .transaction-form-heading {
     display: flex;
     justify-content: space-between;
@@ -112,7 +111,7 @@ input[type="number"] {
   }
 
   input[type="submit"]:hover {
-    background: #51e4d7;
+    background: $link-hover;
     cursor: pointer;
   }
   .submit-button {

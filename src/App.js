@@ -1,15 +1,31 @@
 import React, { useState, useEffect } from "react";
-// import TransactionForm from "./components/TransactionForm/TransactionForm";
 import "./App.scss";
 import Transactions from "./pages/Transactions/Transactions";
 import Report from "./pages/Report/Report";
-import Header from "./components/Header/Header";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 import TransactionService from "./services/TransactionService";
 import TransactionForm from "./components/TransactionForm/TransactionForm";
 import Modal from "react-modal";
 import categories from "./categories";
 import DeleteConfirmation from "./components/DeleteConfirmation/DeleteConfirmation";
+import LogIn from "./pages/LogIn/LogIn";
+import SignUp from "./pages/SignUp/SignUp";
+import AfterSignUp from "./pages/AfterSignUp/AfterSignUp";
+
+const parseJwt = (token) => {
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
+};
 
 const App = () => {
   const [transactions, setTransactions] = useState([]);
@@ -18,9 +34,12 @@ const App = () => {
   const [deleteId, setDeleteId] = useState("");
   const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false);
   const [transactionInfo, setTransactionInfo] = useState({});
+  const history = useHistory();
+  const [parsedJwt, setParsedJwt] = useState({});
+  const location = useLocation();
 
   // Transaction modal
-  const openTransactionModal = () => {
+  const openAddTransactionModal = () => {
     setTransactionModalIsOpen(true);
   };
 
@@ -59,12 +78,17 @@ const App = () => {
       });
   };
 
-  useEffect(() => getTransactions(), []);
+  useEffect(() => {
+    if (location.pathname === "/transactions") {
+      setTransactions([]);
+      getTransactions();
+    }
+  }, [location.pathname]);
 
   //Create transaction
   const handleCreateTransaction = (data) => {
     TransactionService.createTransaction(data)
-      .then((res) => {
+      .then(() => {
         closeTransactionModal();
         getTransactions();
       })
@@ -98,28 +122,52 @@ const App = () => {
       });
   };
 
+  //Login
+  useEffect(() => {
+    const jwt = localStorage.getItem("id_token");
+
+    if (jwt) {
+      const parsedJwt = parseJwt(jwt);
+      console.log(parsedJwt);
+      const expDate = new Date(parsedJwt.exp * 1000);
+      setParsedJwt(parsedJwt);
+
+      if (expDate < new Date()) {
+        history.push(`/login`);
+        return; //stops if this condition is true, it won't execute the line further down
+      }
+    }
+  }, [history, location.pathname]);
+
   return (
     <>
-      <Header
-        transactions={transactions}
-        openTransactionModal={openTransactionModal}
-      />
-
+      <Switch>
+        <Route path="/login" render={() => <LogIn />} />
+      </Switch>
+      <Switch>
+        <Route path="/signup" render={() => <SignUp />} />
+      </Switch>
+      <Switch>
+        <Route path="/aftersignup" render={() => <AfterSignUp />} />
+      </Switch>
       <Switch>
         <Route
-          exact
           path="/transactions"
           render={() => (
             <Transactions
+              openAddTransactionModal={openAddTransactionModal}
               transactions={transactions}
               openDeleteModal={openDeleteModal}
               openUpdateModal={openUpdateModal}
+              username={parsedJwt.nickname}
             />
           )}
         />
         <Route
           path="/report"
-          render={() => <Report transactions={transactions} />}
+          render={() => (
+            <Report transactions={transactions} username={parsedJwt.nickname} />
+          )}
         />
       </Switch>
       <Modal

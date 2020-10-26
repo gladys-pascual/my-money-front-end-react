@@ -1,9 +1,10 @@
 import React from "react";
 import ExpensePie from "../../components/ExpensePie/ExpensePie";
+import Header from "../../components/Header/Header";
 import IncomePie from "../../components/IncomePie/IncomePie";
 import "./Report.scss";
 
-const Report = ({ transactions }) => {
+const Report = ({ transactions, username }) => {
   const incomeData = transactions.filter(
     (transaction) => transaction.type === "income"
   );
@@ -19,13 +20,16 @@ const Report = ({ transactions }) => {
   }, 0);
 
   return (
-    <div className="report">
-      <h3 className="total">Total: € {totalMoney.toFixed(2)} </h3>
-      <div className="pies">
-        <IncomePie incomeData={incomeData} />
-        <ExpensePie expenseData={expenseData} />
+    <>
+      <Header username={username} />
+      <div className="report">
+        <h3 className="total">Total: € {totalMoney.toFixed(2)} </h3>
+        <div className="pies">
+          <IncomePie incomeData={incomeData} />
+          <ExpensePie expenseData={expenseData} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

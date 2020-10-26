@@ -56,7 +56,7 @@ const TransactionForm = ({
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="transaction-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="transaction-form-heading">
         {transactionInfo ? (
           <h1>Update Transaction </h1>
@@ -81,7 +81,7 @@ const TransactionForm = ({
               className="type"
               defaultValue={transactionInfo && transactionInfo.type}
               ref={register({
-                required: "this is required",
+                required: "This is required.",
               })}
             >
               <option value="">Please select a type</option>
