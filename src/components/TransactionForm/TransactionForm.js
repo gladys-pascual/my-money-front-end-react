@@ -178,6 +178,7 @@ const TransactionForm = ({
               name="amount"
               placeholder="€5"
               type="number"
+              step="0.01"
               defaultValue={transactionInfo && transactionInfo.amount}
               ref={register({
                 required: "this is required",

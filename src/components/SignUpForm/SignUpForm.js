@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import "../../assets/logInAndSignUpForm.scss";
 
 const SignUpForm = ({ handleSignUp }) => {
@@ -14,7 +15,7 @@ const SignUpForm = ({ handleSignUp }) => {
   return (
     <div className="form-wrapper">
       <div className="logo">
-        <img src="logo.svg" alt="money me logo" />
+        <Link to="/login"><img src="logo.svg" alt="money me logo" /> </Link>
       </div>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign Up</h1>
@@ -25,7 +26,12 @@ const SignUpForm = ({ handleSignUp }) => {
             aria-invalid={errors.nickname ? "true" : "false"}
             ref={register({
               required: "This is required.",
-              minLength: 3,
+              minLength: {
+              value: 3,
+              message:
+                  "Minimum length is 3 characters.",
+              }
+      
             })}
             type="text"
             placeholder="Username"
@@ -33,13 +39,13 @@ const SignUpForm = ({ handleSignUp }) => {
           <div className="error-message-container">
             <p
               className={
-                errors.username
+                errors.nickname
                   ? "error-message"
                   : "error-message-hidden error-message"
               }
               role="alert"
             >
-              {errors.username && errors.username.message}
+              {errors.nickname && errors.nickname.message}
             </p>
           </div>
 
@@ -48,7 +54,7 @@ const SignUpForm = ({ handleSignUp }) => {
             name="email"
             aria-invalid={errors.email ? "true" : "false"}
             ref={register({
-              required: "this is required",
+              required: "This is required.",
               pattern: {
                 value: /\S+@\S+\.\S+/,
                 message: "Entered value does not match email format",
@@ -75,11 +81,11 @@ const SignUpForm = ({ handleSignUp }) => {
             name="password"
             aria-invalid={errors.passward ? "true" : "false"}
             ref={register({
-              required: "this is required",
+              required: "This is required.",
               minLength: {
                 value: 5,
                 message:
-                  "Password is too short. Please use at least 5 characters.",
+                  "Minimum length is 5 characters.",
               },
             })}
             type="password"

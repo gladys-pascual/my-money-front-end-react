@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.scss";
 import Transactions from "./pages/Transactions/Transactions";
 import Report from "./pages/Report/Report";
-import { Switch, Route, useHistory, useLocation } from "react-router-dom";
+import { Switch, Route, useHistory, useLocation, Redirect } from "react-router-dom";
 import TransactionService from "./services/TransactionService";
 import TransactionForm from "./components/TransactionForm/TransactionForm";
 import Modal from "react-modal";
@@ -136,21 +136,15 @@ const App = () => {
         history.push(`/login`);
         return; //stops if this condition is true, it won't execute the line further down
       }
-    }
+    } 
   }, [history, location.pathname]);
 
   return (
     <>
       <Switch>
         <Route path="/login" render={() => <LogIn />} />
-      </Switch>
-      <Switch>
         <Route path="/signup" render={() => <SignUp />} />
-      </Switch>
-      <Switch>
         <Route path="/aftersignup" render={() => <AfterSignUp />} />
-      </Switch>
-      <Switch>
         <Route
           path="/transactions"
           render={() => (
@@ -169,6 +163,7 @@ const App = () => {
             <Report transactions={transactions} username={parsedJwt.nickname} />
           )}
         />
+        <Route exact path="/" render={() => (<Redirect to="/login"/>)}/>
       </Switch>
       <Modal
         isOpen={transactionModalIsOpen}
