@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation, useHistory } from "react-router-dom";
+import { NavLink, Link, useLocation, useHistory } from "react-router-dom";
 import "./Header.scss";
 
 const Header = ({ openAddTransactionModal, username }) => {
@@ -15,6 +15,9 @@ const Header = ({ openAddTransactionModal, username }) => {
     <header>
       <ul>
         <div className="transactions-and-report">
+          <div className="logo">
+            <Link to="/transactions"> <img src="logo.svg" alt="money me logo" /></Link>
+          </div>
           <li>
             {" "}
             <NavLink to="/transactions" activeClassName="selected">
