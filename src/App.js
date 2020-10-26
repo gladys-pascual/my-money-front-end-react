@@ -79,7 +79,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (location.pathname === "/transactions") {
+    if (location.pathname === "/transactions" || location.pathname === "/report" ) {
       setTransactions([]);
       getTransactions();
     }
