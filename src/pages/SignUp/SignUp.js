@@ -11,7 +11,6 @@ const SignUp = () => {
   const handleSignUp = (data) => {
     SignUpService.signUp(data)
       .then((response) => {
-        console.log(response);
         history.push(`/aftersignup`);
       })
       .catch((err) => {

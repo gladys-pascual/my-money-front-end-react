@@ -128,7 +128,6 @@ const App = () => {
 
     if (jwt) {
       const parsedJwt = parseJwt(jwt);
-      console.log(parsedJwt);
       const expDate = new Date(parsedJwt.exp * 1000);
       setParsedJwt(parsedJwt);
 
