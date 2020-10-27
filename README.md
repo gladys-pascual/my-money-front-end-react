@@ -28,17 +28,17 @@ Your friendly budget app.
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ## Demo
-- Sign up
+#### Sign up
 ![Sign up](public/demo/signup.gif)
-- Log in
+#### Log in
 ![Log in](public/demo/login.gif)
-- Create a transaction
+#### Create a transaction
 ![Create a transaction](public/demo/create.gif)
-- Edit a transaction
+#### Edit a transaction
 ![Edit a transaction](public/demo/edit.gif)
-- Delete a transaction
+#### Delete a transaction
 ![Delete a transaction](public/demo/delete.gif)
-- Report of transactions
+#### Report of transactions
 ![Report of transactions](public/demo/report.gif)
-- Log out
+#### Log out
 ![Log out](public/demo/logout.gif)
