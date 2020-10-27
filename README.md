@@ -1,4 +1,4 @@
-# https://moneyme.cf
+# [moneyme.cf](https://moneyme.cf)
 Your friendly budget app.
 
 ## App Features
