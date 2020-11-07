@@ -3,7 +3,6 @@ import "./TransactionForm.scss";
 import { useForm, Controller } from "react-hook-form";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
-// import dayjs from "dayjs";
 
 const TransactionForm = ({
   handleCreateTransaction,
